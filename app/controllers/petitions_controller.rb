@@ -33,6 +33,13 @@ class PetitionsController < ApplicationController
         render :edit, status: :unprocessable_entity
       end
     end
+
+    def destroy
+      @petition = Petition.find(params[:id])
+      @petition.destroy
+
+      redirect_to root_path, status: :see_other
+    end
   end
 
   private

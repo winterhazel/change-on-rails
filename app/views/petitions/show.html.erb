@@ -4,4 +4,7 @@
 
 <p><%= @petition.description %></p>
 
-<%= link_to "Edit", edit_petition_path(@petition) %>
+<ul>
+  <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
+  <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+</ul>
