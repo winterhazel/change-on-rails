@@ -2,7 +2,9 @@
 <ul>
   <% @petitions.each do |petition| %>
     <li>
-      <%= petition.title %>
+      <a href="/petitions/<%= petition.id %>">
+        <%= petition.title %>
+      </a>
     </li>
   <% end %>
 </ul>
