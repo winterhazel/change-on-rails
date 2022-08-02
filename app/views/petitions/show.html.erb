@@ -3,3 +3,5 @@
 <p><%= @petition.signatures %> have signed. Let's get to <%= @petition.goal %>!</p>
 
 <p><%= @petition.description %></p>
+
+<%= link_to "Edit", edit_petition_path(@petition) %>

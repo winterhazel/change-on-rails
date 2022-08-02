@@ -19,6 +19,20 @@ class PetitionsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
+    def edit
+      @petition = Petition.find(params[:id])
+    end
+
+    def update
+      @petition = Petition.find(params[:id])
+
+      if @petition.update(petition_params)
+        redirect_to @petition
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
   end
 
   private
