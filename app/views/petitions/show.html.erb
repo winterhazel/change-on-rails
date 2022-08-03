@@ -8,3 +8,31 @@
   <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
   <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
 </ul>
+
+<h2>Comments</h2>
+<% @petition.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.content %>
+  </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @petition, @petition.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :content %><br>
+    <%= form.text_area :content %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

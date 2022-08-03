@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "petitions#index"
 
-  resources :petitions
+  resources :petitions do
+    resources :comments
+  end
 end
