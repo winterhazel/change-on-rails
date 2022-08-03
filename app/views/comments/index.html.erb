@@ -1,0 +1,8 @@
+<%= render 'petitions/tabs_header' %> <br>
+
+<%= render @petition.comments %>
+
+<% if user_signed_in? %>
+  <h2>Add a comment:</h2>
+  <%= render 'form' %>
+<% end %>

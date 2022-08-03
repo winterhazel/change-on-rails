@@ -8,11 +8,16 @@ class PetitionsController < ApplicationController
   end
 
   def new
+    if !user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     @petition = Petition.new
   end
 
   def create
-    @petition = Petition.new(petition_params)
+    @petition = current_user.petitions.create(petition_params)
 
     if @petition.save
       redirect_to @petition

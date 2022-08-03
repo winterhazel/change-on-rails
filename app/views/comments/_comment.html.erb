@@ -1,13 +1,7 @@
 <% unless comment.archived? %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
+  <strong><%= comment.user.name %> <%= comment.user.surname %></strong> at <%= comment.created_at %>
+  <p><%= comment.content %></p>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.content %>
-  </p>
 
   <p>
     <%= link_to "Delete comment", [comment.petition, comment], data: {

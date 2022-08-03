@@ -1,16 +1,11 @@
+<%= render 'tabs_header' %> <br>
+
 <h1><%= @petition.title %></h1>
-
+<p><%= @petition.user.name %> <%= @petition.user.surname %> started this petition</p>
 <p><%= @petition.signatures %> have signed. Let's get to <%= @petition.goal %>!</p>
-
 <p><%= @petition.description %></p>
 
 <ul>
   <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
   <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
 </ul>
-
-<h2>Comments</h2>
-<%= render @petition.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
