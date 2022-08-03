@@ -2,14 +2,18 @@
 
 <h1><%= @petition.title %></h1>
 <p><%= @petition.user.name %> <%= @petition.user.surname %> started this petition</p>
-<p><%= @petition.signatures.size %> have signed. Let's get to <%= @petition.goal %>!</p>
 <p><%= @petition.description %></p>
+<p><%= @petition.signatures.size %> have signed. Let's get to <%= @petition.goal %>!</p>
 
 <% if user_signed_in? %>
-  <b>I'm signing this because... (optional)</b>
-  <%= render 'signatures/form' %>
+  <% if @current_signature.nil? %>
+    <b>I'm signing this because... (optional)</b>
+    <%= render 'signatures/form' %>
+  <% else %>
+    <b>Thanks to your support this petition has a chance at winning!</b>
+  <% end %>
 <% else %>
-<p>TODO: Mostrar opção de colocar nome e sobrenome pra assinar</p>
+  <p>TODO: Mostrar opção de colocar nome e sobrenome pra assinar</p>
 <% end %>
 
 
