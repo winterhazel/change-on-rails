@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :petitions do
     resources :signatures
   end
+
+  get "*path" => redirect("/")
 end
