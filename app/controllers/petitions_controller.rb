@@ -45,6 +45,6 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :description, :goal).with_defaults(signatures: 0)
+    params.require(:petition).permit(:title, :description, :goal, :status).with_defaults(signatures: 0)
   end
 end
