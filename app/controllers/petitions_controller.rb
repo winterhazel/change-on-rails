@@ -5,7 +5,7 @@ class PetitionsController < ApplicationController
 
   def show
     @petition = Petition.find(params[:id])
-    @current_signature = Signature.find_by_user_id(current_user.id)
+    @current_signature = @petition.signatures.find_by_user_id(current_user.id)
   end
 
   def new
@@ -51,6 +51,6 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :description, :goal, :status).with_defaults(signatures: 0)
+    params.require(:petition).permit(:title, :description, :goal)
   end
 end
