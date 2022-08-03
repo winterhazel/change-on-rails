@@ -5,11 +5,11 @@ class PetitionsController < ApplicationController
 
   def show
     @petition = Petition.find(params[:id])
-    @current_signature = @petition.signatures.find_by_user_id(current_user.id) if current_user != nil
+    @current_signature = @petition.signatures.find_by_user_id(current_user.id) if user_signed_in?
   end
 
   def new
-    if !user_signed_in?
+    unless user_signed_in?
       redirect_to new_user_session_path
       return
     end
@@ -18,6 +18,11 @@ class PetitionsController < ApplicationController
   end
 
   def create
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     @petition = current_user.petitions.create(petition_params)
 
     if @petition.save
@@ -25,32 +30,50 @@ class PetitionsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
 
-    def edit
-      @petition = Petition.find(params[:id])
-    end
+  def edit
+    @petition = Petition.find(params[:id])
 
-    def update
-      @petition = Petition.find(params[:id])
-
-      if @petition.update(petition_params)
-        redirect_to @petition
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @petition = Petition.find(params[:id])
-      @petition.destroy
-
-      redirect_to root_path, status: :see_other
+    unless can_edit?(@petition)
+      redirect_to petition_path
     end
   end
 
-  private
+  def update
+    @petition = Petition.find(params[:id])
 
-  def petition_params
-    params.require(:petition).permit(:title, :description).with_defaults(goal: 100)
+    unless can_edit?(@petition)
+      redirect_to petition_path
+      return
+    end
+
+    if @petition.update(petition_params)
+      redirect_to @petition, status
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
+
+  def destroy
+    @petition = Petition.find(params[:id])
+
+    unless can_edit?(@petition)
+      redirect_to petition_path
+      return
+    end
+
+    @petition.destroy
+    redirect_to root_path, status: :see_other
+  end
+end
+
+private
+
+def can_edit? (petition)
+  user_signed_in? && petition.user.id == current_user.id
+end
+
+def petition_params
+  params.require(:petition).permit(:title, :description).with_defaults(goal: 100)
 end
