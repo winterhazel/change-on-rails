@@ -14,14 +14,6 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
-  <div>
-    <%= form.label :goal %><br>
-    <%= form.number_field :goal %>
-    <% petition.errors.full_messages_for(:goal).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
   
   <div>
     <%= form.submit %>
