@@ -1,0 +1,4 @@
+<% unless signature.private? %>
+  <strong><%= signature.user.name %> <%= signature.user.surname %></strong> at <%= signature.created_at %>
+  <p><%= signature.message %></p>
+<% end %>
