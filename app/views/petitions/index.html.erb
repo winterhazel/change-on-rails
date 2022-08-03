@@ -1,14 +1,12 @@
 <h1>Petitions</h1>
 
-<%= Petition.public_count %> petitions
+<%= Petition.all.length %> petition(s)
 
 <ul>
   <% @petitions.each do |petition| %>
-    <% unless petition.archived? %>
-      <li>
-        <%= link_to petition.title, petition %>
-      </li>
-    <% end %>
+    <li>
+      <%= link_to petition.title, petition %>
+    </li>
   <% end %>
 </ul>
 <%= link_to "Start a petition", new_petition_path %>
