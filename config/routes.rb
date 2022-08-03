@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root "application#index"
 
+  get "/petitions/:id/comments", to: "comments#index"
+
   resources :petitions do
-    resources :comments
+    resources :signatures
   end
 end

@@ -1,0 +1,11 @@
+<%= form_with model: [@petition, @petition.signatures.build] do |form| %>
+  <p>
+    <%= form.text_area :message %>
+  </p>
+  <p>
+    <%= form.check_box :private %> <span>Do not display my name and comment on this petition</span>
+  </p>
+  <p>
+    <%= form.submit "Sign this petition" %>
+  </p>
+<% end %>

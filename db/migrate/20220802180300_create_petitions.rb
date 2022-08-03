@@ -3,7 +3,6 @@ class CreatePetitions < ActiveRecord::Migration[7.0]
     create_table :petitions do |t|
       t.string :title
       t.text :description
-      t.integer :signatures
       t.integer :goal
 
       t.timestamps
