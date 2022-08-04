@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
     end
-    @petitions = @user.petitions
-    @signatures = @user.signatures
+    @petitions = @user.petitions.order(created_at: :desc)
+    @signatures = @user.signatures.order(created_at: :desc)
   end
 
   private
