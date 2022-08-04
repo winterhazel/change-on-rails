@@ -1,24 +1,32 @@
 <%= render 'tabs_header' %> <br>
 
 <h1><%= @petition.title %></h1>
-<p><%= link_to "#{@petition.user.name} #{@petition.user.surname}", "/users/#{@petition.user.id}" %> started this petition</p>
+<p><%= link_to "#{@petition.user.name} #{@petition.user.surname}", "/users/#{@petition.user.id}" %> started this
+  petition</p>
 <p><%= @petition.description %></p>
-<p><%= @petition.signatures.size %> have signed. Let's get to <%= @petition.goal %>!</p>
 
-<% if user_signed_in? %>
-  <% if @current_signature.nil? %>
-    <b>I'm signing this because... (optional)</b>
-    <%= render 'signatures/form' %>
+<% if @petition.status == 'open' %>
+  <p><%= @petition.signatures.size %> have signed. Let's get to <%= @petition.goal %>!</p>
+  <% if user_signed_in? %>
+    <% if @current_signature.nil? %>
+      <b>I'm signing this because... (optional)</b>
+      <%= render 'signatures/form' %>
+    <% else %>
+      <b>Thanks to your support this petition has a chance at winning!</b>
+    <% end %>
+    <% if @petition.user.id == current_user.id %>
+      <ul>
+        <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
+        <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+      </ul>
+    <% end %>
   <% else %>
-    <b>Thanks to your support this petition has a chance at winning!</b>
+    <%= link_to "In order to sign this petition, you must log in first!", new_user_session_path, :class => 'navbar-link' %>
   <% end %>
-<% else %>
-  <%= link_to "In order to sign this petition, you must log in first!", new_user_session_path, :class => 'navbar-link' %>
-<% end %>
-
-<% if user_signed_in? && @petition.user.id == current_user.id %>
-  <ul>
-    <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
-    <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
-  </ul>
+<% elsif @petition.status == 'victory' %>
+  <h2>Confirmed victory</h2>
+  <p>This petition made change with <%= @petition.signatures.size %> supporter(s)!</p>
+<% elsif @petition.status == 'closed' %>
+  <h2>Closed</h2>
+  <p>This petition was closed with <%= @petition.signatures.size %> supporter(s)</p>
 <% end %>

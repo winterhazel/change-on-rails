@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_195829) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_153919) do
   create_table "petitions", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_195829) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.boolean "victory"
+    t.string "status"
     t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 

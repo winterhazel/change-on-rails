@@ -1,3 +1,6 @@
 <h1>Edit Petition</h1>
 
+<%= link_to "Declare victory", petition_path(@petition) + "/declare_victory", data: {turbo_method: :get, turbo_confirm: "Are you sure?"} %> |
+<%= link_to "Close petition", petition_path(@petition) + "/close_petition", data: {turbo_method: :get, turbo_confirm: "Are you sure?"} %>
+
 <%= render "form", petition: @petition %>
