@@ -2,7 +2,13 @@ class PetitionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    @petitions = Petition.all
+    if params[:selected] == "recent"
+      @petitions = Petition.order("created_at DESC")
+    elsif params[:selected] == "victories"
+      # @petitions = Petition.where("id > '1'")
+    else
+      @petitions = Petition.left_joins(:signatures).group(:id).order!("COUNT(signatures.id) DESC")
+    end
   end
 
   def show

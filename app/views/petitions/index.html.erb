@@ -1,5 +1,8 @@
 <h1>Petitions</h1>
 
+<a href="<%= petitions_path %>">Popular</a> | <a href="<%= petitions_path %>?selected=recent">Recent</a> |
+<a href="?selected=victories">Victories</a> <br>
+
 <%= Petition.all.length %> petition(s)
 
 <ul>
