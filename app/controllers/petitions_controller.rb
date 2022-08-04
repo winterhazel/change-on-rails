@@ -12,7 +12,7 @@ class PetitionsController < ApplicationController
 
   def new
     unless user_signed_in?
-      redirect_to new_user_session_path
+      redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}"
       return
     end
 
@@ -21,7 +21,7 @@ class PetitionsController < ApplicationController
 
   def create
     unless user_signed_in?
-      redirect_to new_user_session_path
+      redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}"
       return
     end
 
