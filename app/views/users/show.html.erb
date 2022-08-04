@@ -1,3 +1,5 @@
+<%= image_tag (@user.avatar.attached?) ? @user.avatar : 'default-user-profile.svg', class: "user-image" %>
+
 <h1><%= "#{@user.name} #{@user.surname}" %></h1>
 <p>
   <% unless @user.country.nil? || @user.country == "Country" %>

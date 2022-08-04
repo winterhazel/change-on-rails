@@ -3,6 +3,13 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <%= image_tag (@user.avatar.attached?) ? @user.avatar : 'default-user-profile.svg', class: "user-image" %>
+
+  <div class="field">
+    <%= f.label "Upload photo" %><br />
+    <%= f.file_field :avatar %>
+  </div>
+
   <div class="field">
     <%= f.label "First name" %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>

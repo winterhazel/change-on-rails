@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   get "/search", to: "search#index"
   post "/search", to: "search#index"
 
-  get "*path" => redirect("/")
+  get "*path" => redirect("/"), constraints: lambda { |req| req.path.exclude? "rails/active_storage" }
 end
