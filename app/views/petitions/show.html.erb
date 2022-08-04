@@ -1,7 +1,7 @@
 <%= render 'tabs_header' %> <br>
 
 <h1><%= @petition.title %></h1>
-<p><%= @petition.user.name %> <%= @petition.user.surname %> started this petition</p>
+<p><%= link_to "#{@petition.user.name} #{@petition.user.surname}", "/users/#{@petition.user.id}" %> started this petition</p>
 <p><%= @petition.description %></p>
 <p><%= @petition.signatures.size %> have signed. Let's get to <%= @petition.goal %>!</p>
 
@@ -13,7 +13,7 @@
     <b>Thanks to your support this petition has a chance at winning!</b>
   <% end %>
 <% else %>
-  <p>TODO: Mostrar opção de colocar nome e sobrenome pra assinar</p>
+  <%= link_to "In order to sign this petition, you must log in first!", new_user_session_path, :class => 'navbar-link' %>
 <% end %>
 
 <% if user_signed_in? && @petition.user.id == current_user.id %>
