@@ -3,7 +3,7 @@
 <a href="<%= petitions_path %>">Popular</a> | <a href="<%= petitions_path %>?selected=recent">Recent</a> |
 <a href="?selected=victories">Victories</a> <br>
 
-<%= Petition.all.length %> petition(s)
+<%= Petition.count %> petition(s) on total
 
 <ul>
   <% @petitions.each do |petition| %>

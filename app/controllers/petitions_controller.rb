@@ -3,11 +3,11 @@ class PetitionsController < ApplicationController
 
   def index
     if params[:selected] == "recent"
-      @petitions = Petition.order("created_at DESC")
+      @petitions = Petition.order("created_at DESC").limit(10)
     elsif params[:selected] == "victories"
-      @petitions = Petition.where("status == 'victory'")
+      @petitions = Petition.where("status == 'victory'").limit(10)
     else
-      @petitions = Petition.left_joins(:signatures).group(:id).order!("COUNT(signatures.id) DESC")
+      @petitions = Petition.left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC").limit(10)
     end
   end
 
