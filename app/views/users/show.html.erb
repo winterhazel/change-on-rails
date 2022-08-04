@@ -1,8 +1,10 @@
 <h1><%= "#{@user.name} #{@user.surname}" %></h1>
 <p>
-  <% if @user.country != "Country" %><%= @user.country %>
+  <% unless @user.country.nil? || @user.country == "Country" %>
+    <%= @user.country %>
   <% end %>
-  <% if @user.twitter_username.length > 0 %>@<%= @user.twitter_username %>
+  <% unless @user.twitter_username.nil? || @user.twitter_username.length == 0 %>
+    @<%= @user.twitter_username %>
   <% end %>
 </p>
 <p><%= @user.about_me %></p>
