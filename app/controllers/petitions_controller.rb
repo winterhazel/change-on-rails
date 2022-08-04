@@ -106,7 +106,7 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :description).with_defaults(goal: 100, status: :open)
+    params.require(:petition).permit(:title, :description, :picture).with_defaults(goal: 100, status: :open)
   end
 
   def can_edit? (petition)

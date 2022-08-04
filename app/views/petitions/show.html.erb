@@ -1,6 +1,7 @@
 <%= render 'tabs_header' %> <br>
 
 <h1><%= @petition.title %></h1>
+<%= image_tag @petition.picture, class: "petition-image" %>
 <p><%= link_to "#{@petition.user.name} #{@petition.user.surname}", "/users/#{@petition.user.id}" %> started this
   petition</p>
 <p><%= @petition.description %></p>
