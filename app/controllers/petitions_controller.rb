@@ -5,7 +5,7 @@ class PetitionsController < ApplicationController
     if params[:selected] == "recent"
       @petitions = Petition.order("created_at DESC").limit(10)
     elsif params[:selected] == "victories"
-      @petitions = Petition.where("status == 'victory'").limit(10)
+      @petitions = Petition.where("status == 'victory'").order("updated_at DESC").limit(10)
     else
       @petitions = Petition.left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC").limit(10)
     end
