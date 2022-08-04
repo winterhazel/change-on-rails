@@ -1,0 +1,14 @@
+<h2>Search</h2>
+
+<%= form_tag do %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% unless @petitions.nil? %>
+  <% @petitions.each do |petition| %>
+    <ul>
+      <li><%= link_to petition.title, petition_path(petition) %></li>
+    </ul>
+  <% end %>
+<% end %>

@@ -16,6 +16,7 @@
   <%= link_to "change-on-rails", root_path, :class => 'navbar-link' %> |
   <%= link_to "Start a petition", new_petition_path, :class => 'navbar-link' %> |
   <%= link_to "Browse", petitions_path, :class => 'navbar-link' %> |||
+  <%= link_to "Search", "/search", :class => 'navbar-link' %> |||
 
   <% if user_signed_in? %>
     <%= link_to 'My petitions', "/users/me", :class => 'navbar-link' %> |
