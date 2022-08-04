@@ -110,7 +110,7 @@ class PetitionsController < ApplicationController
   end
 
   def can_edit? (petition)
-    user_signed_in? && petition.user.id == current_user.id && petition.status == :open
+    user_signed_in? && petition.user.id == current_user.id && petition.status == 'open'
   end
 
   def record_not_found

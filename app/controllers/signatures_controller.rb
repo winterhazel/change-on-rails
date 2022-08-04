@@ -1,7 +1,15 @@
 class SignaturesController < ApplicationController
+  def show
+    redirect_to petition_path(Petition.find(params[:petition_id]))
+  end
+
+  def new
+    redirect_to petition_path(Petition.find(params[:petition_id]))
+  end
+
   def create
     @petition = Petition.find(params[:petition_id])
-    if user_signed_in? and @petition.signatures.find_by_user_id(current_user.id).nil?
+    if user_signed_in? && @petition.status == 'open' && @petition.signatures.find_by_user_id(current_user.id).nil?
       @signature = @petition.signatures.create(signature_params)
       redirect_to petition_path(@petition)
       # Update the goal
@@ -21,9 +29,13 @@ class SignaturesController < ApplicationController
         @petition.save
       end
     else
-      # Not logged in/user already signed for petition
+      # Not logged in/petition not open/user already signed for petition
       redirect_to petition_path(@petition)
     end
+  end
+
+  def edit
+    redirect_to petition_path(Petition.find(params[:petition_id]))
   end
 
   private
