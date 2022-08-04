@@ -1,0 +1,11 @@
+<%= turbo_stream.append "petitions" do %>
+  <% @petitions.each do |petition| %>
+    <li><%= link_to petition.title, petition_path(petition) %></li>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "next_link" do %>
+  <% if @pagy.next.present? %>
+    <%= button_to "next", pagy_url_for(@pagy, @pagy.next) %>
+  <% end %>
+<% end %>

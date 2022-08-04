@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/petitions/:id/close_petition", to: "petitions#close_petition"
 
   get "/search", to: "search#index"
-  post "/search", to: "search#query"
+  post "/search", to: "search#index"
 
   get "*path" => redirect("/")
 end

@@ -2,13 +2,16 @@
 
 <%= form_tag do %>
   <%= text_field_tag :query, params[:query] %>
-  <%= submit_tag "Search" %>
+  <%= submit_tag "Search", :onclick => "document.getElementById('petitions').innerHTML='';" %>
 <% end %>
 
-<% unless @petitions.nil? %>
-  <% @petitions.each do |petition| %>
-    <ul>
-      <li><%= link_to petition.title, petition_path(petition) %></li>
-    </ul>
+<ul>
+  <div id="petitions">
+  </div>
+</ul>
+
+<div id="next_link">
+  <% if @pagy.next.present? && !params[:query].nil? %>
+    <%= button_to "next", pagy_url_for(@pagy, @pagy.next) %>
   <% end %>
-<% end %>
+</div>
