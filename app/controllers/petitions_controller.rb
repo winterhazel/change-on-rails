@@ -51,7 +51,7 @@ class PetitionsController < ApplicationController
     end
 
     if @petition.update(petition_params)
-      redirect_to @petition, status
+      redirect_to @petition
     else
       render :edit, status: :unprocessable_entity
     end

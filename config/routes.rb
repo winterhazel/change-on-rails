@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root "application#index"
   get "/petitions/:id/comments", to: "comments#index"
   get "/users/:id", to: "users#show"
-  get "/users/me", to: "users#show"
 
   resources :petitions do
     resources :signatures

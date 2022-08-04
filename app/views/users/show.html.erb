@@ -1,5 +1,10 @@
 <h1><%= "#{@user.name} #{@user.surname}" %></h1>
-<p><%= "#{@user.country} | @#{@user.twitter_username}" %></p>
+<p>
+  <% if @user.country != "Country" %><%= @user.country %>
+  <% end %>
+  <% if @user.twitter_username.length > 0 %>@<%= @user.twitter_username %>
+  <% end %>
+</p>
 <p><%= @user.about_me %></p>
 
 <% if @user.id == current_user.id %>
