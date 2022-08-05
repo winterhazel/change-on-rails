@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "application#index"
+  get "/", to: "application#index"
+  post "/", to: "application#index"
 
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions"}
   get "/users/:id", to: "users#show"

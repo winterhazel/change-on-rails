@@ -11,12 +11,26 @@
 
     <div class="landing_page_petitions_section">
       <h2 class="petitions_title">What's happening on change-on-rails</h2>
-      <ul class="landing_page_petitions_list" style="padding: 0px;">
-        <% Petition.all.order("created_at DESC").limit(3).each do |petition| %>
+
+      <ul id="landing_page_petitions_list" style="padding: 0px;">
+        <% @petitions.each do |petition| %>
           <li><%= render petition %></li>
         <% end %>
       </ul>
+
+      <div id="load_more">
+        <% if @pagy.next.present? %>
+          <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more" %>
+        <% end %>
+      </div>
+
     </div>
+
+    <div class="imeYQL">
+      <div class="imeYQL dot1"></div>
+      <div class="imeYQL dot2"></div>
+    </div>
+
 
   </div>
 </div>

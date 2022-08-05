@@ -1,10 +1,10 @@
-<%= turbo_stream.append "petitions" do %>
+<%= turbo_stream.append "landing_page_petitions_list" do %>
   <% @petitions.each do |petition| %>
-    <li><%= link_to petition.title, petition_path(petition) %></li>
+    <li><%= render petition %></li>
   <% end %>
 <% end %>
 
-<%= turbo_stream.update "next_link" do %>
+<%= turbo_stream.update "load_more" do %>
   <% if @pagy.next.present? %>
     <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), {class: "load_more"} %>
   <% end %>
