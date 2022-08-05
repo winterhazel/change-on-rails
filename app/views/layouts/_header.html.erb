@@ -17,16 +17,27 @@
       </div>
     </div>
     <div class="header_secondary_items_box">
-      <div class="header_item">
-        <%= link_to "Search", "/search", :class => 'header_link' %>
-      </div>
-      <div class="header_item" style="margin-right: 0px;">
+      <div style="display: flex;">
+        <div class="header_item">
+          <%= link_to "Search", "/search", :class => 'header_link' %>
+        </div>
         <% if user_signed_in? %>
-          <div>
-            <%= image_tag (current_user.avatar.attached?) ? current_user.avatar : 'default-user-profile.svg', :class => 'header_image' %>
+          <div class="header_item" style="margin-right: 0px; position: relative;">
+            <div>
+              <%= image_tag (current_user.avatar.attached?) ? current_user.avatar : 'default-user-profile.svg', :class => 'header_image', :style => "cursor: pointer;", :onclick => "document.getElementById('dropdown_menu').style.display = 'block';" %>
+            </div>
+            <div class="dropdown_menu" id="dropdown_menu">
+              <%= link_to "My petitions", "/users/me", :class => 'header_link dropdown_menu_header_link' %>
+              <%= link_to "Settings", edit_user_registration_path, :class => 'header_link dropdown_menu_header_link' %>
+              <hr class="separator header_link dropdown_menu_header_link"/>
+              <div><%= "#{current_user.name} #{current_user.surname}" %></div>
+              <%= link_to "Log out", destroy_user_session_path, :class => 'header_link header_logout' %>
+            </div>
           </div>
         <% else %>
-          <%= link_to "Login", new_user_session_path, :class => 'header_link' %>
+          <div class="header_item" style="margin-right: 0px;">
+            <%= link_to "Log in", new_user_session_path, :class => 'header_link' %>
+          </div>
         <% end %>
       </div>
     </div>
