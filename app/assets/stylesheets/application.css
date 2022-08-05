@@ -55,6 +55,8 @@ body {
 
 .header_item {
     margin-right: 25px;
+    display: flex;
+    align-items: center;
 }
 
 .header_link {
@@ -67,6 +69,19 @@ body {
 
 .header_link:hover {
     color: rgb(236, 44, 34);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.header_image {
+    width: 24px;
+    height: 24px;
+    border-radius: 10000rem !important;
+    object-fit: cover;
 }
 
 footer {
