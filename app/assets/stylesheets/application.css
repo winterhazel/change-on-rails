@@ -261,6 +261,10 @@ footer {
     font-size: 0.8rem;
     margin: 15px 0px 0px 0px;
     line-break: anywhere;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
 }
 
 .petition_card_image_section {
