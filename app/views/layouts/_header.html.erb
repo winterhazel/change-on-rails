@@ -1,3 +1,14 @@
+<script>
+    document.body.addEventListener('click', hide_dropdown_menu, true)
+
+    function hide_dropdown_menu() {
+        let dropdown_menu = document.getElementById('dropdown_menu');
+        if (dropdown_menu.style.display === 'block') {
+            dropdown_menu.style.display = 'none';
+        }
+    }
+</script>
+
 <header class="website_header">
   <div class="header_box">
     <div class="header_primary_box">
@@ -43,4 +54,5 @@
     </div>
   </div>
 </header>
+
 <hr class="separator"/>
