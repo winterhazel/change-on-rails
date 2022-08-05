@@ -11,9 +11,9 @@
 
     <div class="landing_page_petitions_section">
       <h2 class="petitions_title">What's happening on change-on-rails</h2>
-      <ul class="landing_page_petitions_list">
-        <%= Petition.all.limit(2).each do |petition| %>
-          <%= render petition %>
+      <ul class="landing_page_petitions_list" style="padding: 0px;">
+        <% Petition.all.order("created_at DESC").limit(3).each do |petition| %>
+          <li><%= render petition %></li>
         <% end %>
       </ul>
     </div>
