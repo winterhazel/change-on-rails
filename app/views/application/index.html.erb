@@ -1,1 +1,22 @@
-<h1>Landing page</h1>
+<div class="landing_page">
+  <div class="landing_page_content">
+
+    <div class="landing_page_title_section">
+      <h1 class="big_title">The world’s platform for change</h1>
+      <span class="small_title"><%= User.count %> people taking action victories every day.</span>
+      <div>
+        <a class="button" href="<%= new_petition_path %>">Start a petition</a>
+      </div>
+    </div>
+
+    <div class="landing_page_petitions_section">
+      <h2 class="petitions_title">What's happening on change-on-rails</h2>
+      <ul class="landing_page_petitions_list">
+        <%= Petition.all.limit(2).each do |petition| %>
+          <%= render petition %>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -166,3 +166,66 @@ footer {
 .header_logout:hover {
     color: rgb(54, 49, 53);
 }
+
+.landing_page {
+    background-image: url("https://static.change.org/home/illustration-world-map-2015-08-18.gif");
+    background-repeat: no-repeat;
+    background-size: 1200px;
+    background-position: 50% -130px;
+}
+
+.landing_page_content {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.landing_page_title_section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.big_title {
+    font-size: 3.05176rem;
+    line-height: 1.2288;
+    text-align: center;
+    margin: 10px;
+
+}
+
+.small_title {
+    font-size: 1.25rem;
+}
+
+.button {
+    background: rgb(236, 44, 34) none repeat scroll 0% 0%;
+    color: rgb(255, 255, 255);
+    border-color: rgb(236, 44, 34);
+    text-decoration: none;
+    transition: background 0.1s ease 0s, border 0.1s ease 0s;
+    cursor: pointer;
+    outline: currentcolor none 0px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    line-height: 1;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.petitions_title {
+    font-size: 1.5625rem;
+    padding: 30px 0px;
+    margin: 0px;
+    font-weight: bold;
+    line-height: 1.2;
+}
