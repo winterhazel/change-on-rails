@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   validates :name, presence: true
   validates :surname, presence: true
+
+  def remember_me
+    (super == nil) ? true : super
+  end
 end

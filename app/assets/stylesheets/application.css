@@ -432,3 +432,22 @@ ul {
     background-image: linear-gradient(to right, rgb(255, 166, 0), rgb(236, 44, 34));
     border-radius: 0px !important;
 }
+
+h3 {
+    font-size: 1.5625rem;
+    line-height: 1.28;
+    margin: 2.16em 0 .4em;
+}
+
+.text_input {
+    width: 100%;
+    font-size: 1rem;
+    line-height: normal;
+    padding: 10px;
+    border: solid 1px #dbd9db;
+    border-radius: 5px;
+    color: #363135;
+    -webkit-appearance: none;
+    display: block;
+    box-sizing: border-box;
+}
