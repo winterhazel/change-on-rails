@@ -346,4 +346,89 @@ li:not(:first-child) {
 ul {
     list-style-type: none;
     margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;;
+}
+
+.browse_header_container {
+    margin-top: 15px !important;
+    margin-left: 16.66666667%;
+    width: 66.66666667%;
+    position: relative;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.browse_title {
+    margin: 0px;
+    font-size: 1.24rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.browse_menu {
+    display: flex;
+    line-height: 1.25;
+}
+
+.browse_menu .header_link {
+    margin-right: 15px;
+    padding: 8px 0px;
+}
+
+.browse_selected {
+    display: block;
+    padding: 8px 0px;
+    text-decoration: none;
+    color: rgb(236, 44, 34);
+    border-bottom: 2px solid rgb(236, 44, 34);
+    cursor: default;
+    font-weight: bold;
+    margin-bottom: -1px;
+}
+
+.row {
+    margin-left: 16.66666667%;
+    width: 66.66666667%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.border_rounded {
+    border-radius: 5px;
+}
+
+.bg_brighter {
+    background-color: #fff !important;
+}
+
+::before {
+    box-sizing: border-box;
+}
+
+::after {
+    box-sizing: border-box;
+}
+
+.gradient-thermometer {
+    text-align: left !important;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 10000rem !important;
+    background-color: rgb(219, 217, 219);
+}
+
+.gradient-thermometer-fill {
+    background-image: linear-gradient(to right, rgb(255, 166, 0), rgb(236, 44, 34));
+    border-radius: 0px !important;
 }

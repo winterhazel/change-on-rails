@@ -1,14 +1,37 @@
-<h1>Petitions</h1>
+<div class="container">
+  <div class="browse_header_container">
+    <div class="browse_title">
+      <h1 style="margin: 0px;">Discover petitions to sign</h1>
+    </div>
+    <div class="browse_menu">
+      <%= link_to "Popular", petitions_path, :class => 'header_link', :id => "popular" %>
+      <%= link_to "Recent", petitions_path + "?selected=recent", :class => 'header_link', :id => "recent" %>
+      <%= link_to "Victories", petitions_path + "?selected=victories", :class => 'header_link', :id => "victories" %>
+    </div>
+  </div>
+</div>
 
-<a href="<%= petitions_path %>">Popular</a> | <a href="<%= petitions_path %>?selected=recent">Recent</a> |
-<a href="?selected=victories">Victories</a> <br>
+<script>
+    // Selected browser item
+    if ("<%= params[:selected] %>" == "recent") {
+        document.getElementById("recent").classList.add("browse_selected")
+    } else if ("<%= params[:selected] %>" == "victories") {
+        document.getElementById("victories").classList.add("browse_selected")
+    } else {
+        document.getElementById("popular").classList.add("browse_selected")
+    }
+</script>
 
-<%= Petition.count %> petition(s) on total
+<hr class="separator"/>
 
-<ul>
-  <% @petitions.each do |petition| %>
-    <li>
-      <%= link_to petition.title, petition %>
-    </li>
-  <% end %>
-</ul>
+<div style="background-color: #f6f4f6 !important;">
+  <div class="container">
+    <div class="row" style="padding-top: 30px !important; padding-bottom: 30px !important;">
+      <ul>
+        <% @petitions.each do |petition| %>
+          <li><%= render 'petition_with_goal', petition: petition  %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
