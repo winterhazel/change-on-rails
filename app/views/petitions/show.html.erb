@@ -18,7 +18,7 @@
     <% if @petition.user.id == current_user.id %>
       <ul>
         <li><%= link_to "Edit", edit_petition_path(@petition) %></li>
-        <li><%= link_to "Destroy", petition_path(@petition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+        <%= button_to "Destroy", @petition, :method => :delete, data: {turbo: false}%>
       </ul>
     <% end %>
   <% else %>

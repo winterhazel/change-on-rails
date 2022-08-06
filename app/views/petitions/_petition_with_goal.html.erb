@@ -1,22 +1,22 @@
 <a href=<%= petition_path(petition) %>>
-  <div class="petition_card border_rounded bg_brighter" style="border: none;">
+  <div class="petition_card border_rounded bg_brighter" style="margin-bottom:25px;border: none;">
     <div class="petition_card_content" style="padding: 0px;">
       <div style="float: left;padding-right: 0 !important;width: 33.33333333%;">
         <div style="border-width: 0px;border-radius: 0px;border-color: rgb(219, 217, 219);border-style: solid;">
-          <div class="petition_card_image_section" style="background-image: url('<%= url_for petition.picture %>');">
+          <div class="petition_card_image_section" style="border-radius: 5px 0px 0px 5px;background-image: url('<%= url_for petition.picture %>');">
             <div style="display: block; width: 100%; padding-bottom: 100%;"></div>
             <div style="bottom: 0px; height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"></div>
           </div>
         </div>
       </div>
 
-      <div style="width: 66.66666667%; float: left;padding:20px;">
-        <div class="petition_card_text_section" style="padding: 0px 10px;height:106px;">
+      <div style="width: 66.66666667%; float: left;padding:20px 0px;">
+        <div class="petition_card_text_section" style="line-break: anywhere;padding: 0px 30px;height:106px;">
           <h4 class="petition_card_title" style="color:rgb(54, 49, 53);margin-top: 0 !important;font-size: 1.25rem;line-height: 1.2;margin: 2em 0 .4em;"><%= petition.title %></h4>
           <p class="petition_card_description" style="margin-top: 5px !important;font-size: 1rem;line-height: 1.5;"><%= petition.description %></p>
         </div>
 
-        <div style="margin-top: 20px !important;padding: 0px 10px;">
+        <div style="margin-top: 20px !important;padding: 0px 30px;">
           <div class="gradient-thermometer">
             <div class="gradient-thermometer gradient-thermometer-fill" style="width: <%= ((petition.signatures.size * 100) / petition.goal )%>%;">
             </div>

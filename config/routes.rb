@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show"
 
   resources :petitions do
+    collection do
+      post :index
+    end
     resources :signatures
   end
   get "/petitions/:id/comments", to: "comments#index"

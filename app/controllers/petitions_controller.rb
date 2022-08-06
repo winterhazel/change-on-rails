@@ -3,11 +3,22 @@ class PetitionsController < ApplicationController
 
   def index
     if params[:selected] == "recent"
-      @petitions = Petition.order("created_at DESC").limit(10)
+      @search = Petition.order("created_at DESC").limit(10)
     elsif params[:selected] == "victories"
-      @petitions = Petition.where("status == 'victory'").order("updated_at DESC").limit(10)
+      @search = Petition.where("status == 'victory'").order("updated_at DESC").limit(10)
     else
-      @petitions = Petition.left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC").limit(10)
+      @search = Petition.left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC").limit(10)
+    end
+
+    @pagy, @petitions = pagy_countless(@search, items: 3)
+
+    respond_to do |format|
+      format.html do # GET and create/edit POSTs
+        if request.post?
+          create
+        end
+      end
+      format.turbo_stream
     end
   end
 
@@ -72,7 +83,7 @@ class PetitionsController < ApplicationController
     end
 
     @petition.destroy
-    redirect_to root_path, status: :see_other
+    redirect_to petitions_path
   end
 
   def declare_victory

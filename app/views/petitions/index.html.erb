@@ -27,11 +27,17 @@
 <div style="background-color: #f6f4f6 !important;">
   <div class="container">
     <div class="row" style="padding-top: 30px !important; padding-bottom: 30px !important;">
-      <ul>
+      <ul id="petition_list">
         <% @petitions.each do |petition| %>
           <li><%= render 'petition_with_goal', petition: petition  %></li>
         <% end %>
       </ul>
+
+      <div id="load_more">
+        <% if @pagy.next.present? %>
+          <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more", style: "margin: 0px;"%>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
