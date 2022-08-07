@@ -1,3 +1,30 @@
-<%= render 'petitions/tabs_header' %> <br>
+<%= render 'petitions/tabs_header' %>
 
-<%= render @signatures %>
+<div class="container" style="margin-top: 10px !important;margin-bottom: 30px !important;">
+  <div style="padding-left: 10px;padding-right: 10px;margin: 0;">
+    <div style="margin-left: 8.33333333%;width: 83.33333333%;">
+
+      <h3>Reasons for signing</h3>
+      <p style="margin: 0;">
+        See why other supporters are signing, why this petition is important to them, and share your reason for signing
+        (this will mean a lot to the starter of the petition).
+      </p>
+
+      <div style="margin-top: 20px !important;">
+
+        <div id="signatures">
+          <%= render @signatures %>
+        </div>
+
+        <div id="load_more">
+          <% if @pagy.next.present? %>
+            <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more", style: "margin: 0px;"%>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

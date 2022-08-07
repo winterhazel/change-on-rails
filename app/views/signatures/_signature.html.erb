@@ -1,4 +1,19 @@
 <% unless signature.private? %>
-  <strong><%= signature.user.name %> <%= signature.user.surname %></strong> at <%= signature.created_at %>
-  <p><%= signature.message %></p>
+  <div class="box">
+    <div style="padding: 20px !important;">
+      <a style="display: flex;" href="/users/<%= signature.user.id %>">
+        <div>
+          <%= image_tag (signature.user.avatar.attached?) ? signature.user.avatar : 'default-user-profile.svg', class: "petition_card_user_avatar", style: "width: 2.25rem !important;height: 2.25rem !important;" %>
+        </div>
+        <div style="font-size: .8rem !important;">
+          <strong><%= signature.user.name %> <%= signature.user.surname %></strong>
+          <div style="color: #737273 !important;"><%= signature.created_at.strftime("%b %d, %Y") %></div>
+        </div>
+      </a>
+
+      <div style="margin-top: 10px !important;margin-bottom: 10px !important;">
+        <span style="overflow-wrap: break-word;overflow: hidden !important;word-break: break-word !important;"><%= signature.message %></span>
+      </div>
+    </div>
+  </div>
 <% end %>

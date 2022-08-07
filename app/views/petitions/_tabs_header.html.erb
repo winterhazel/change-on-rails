@@ -1,2 +1,23 @@
-<a href="<%= petition_path(@petition) %>">Petition details</a> |
-<a href="<%= petition_path(@petition) %>/comments">Comments</a>
+<div>
+  <div class="tabs_header_container">
+
+    <a id="header_details" href="<%= petition_path(@petition) %>" class="tabs_header_item">Petition
+      details</a>
+
+    <% unless @petition.signatures.size == 0 %>
+      <a id="header_comments" href="<%= petition_path(@petition) %>/comments" class="tabs_header_item">Comments</a>
+    <% end %>
+
+  </div>
+
+  <hr class="separator">
+
+</div>
+
+<script>
+    if (window.location.toString().includes("/comments")) {
+        document.getElementById("header_comments").classList.add("tabs_header_selected");
+    } else {
+        document.getElementById("header_details").classList.add("tabs_header_selected");
+    }
+</script>

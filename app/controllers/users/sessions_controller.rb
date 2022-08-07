@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    session[:redirect_to] = params[:redirect_to] if params[:redirect_to].present?
+    session[:redirect_to] = params[:redirect_to]
     super
   end
 

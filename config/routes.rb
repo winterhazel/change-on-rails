@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :signatures
   end
   get "/petitions/:id/comments", to: "comments#index"
+  post "/petitions/:id/comments", to: "comments#index"
   get "/petitions/:id/declare_victory", to: "petitions#declare_victory"
   get "/petitions/:id/close_petition", to: "petitions#close_petition"
 

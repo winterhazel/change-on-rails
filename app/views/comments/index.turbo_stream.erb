@@ -1,0 +1,11 @@
+<%= turbo_stream.append "signatures" do %>
+  <% @signatures.each do |signature| %>
+    <%= render signature  %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "load_more" do %>
+  <% if @pagy.next.present? %>
+    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more", style: "margin: 0px;" %>
+  <% end %>
+<% end %>
