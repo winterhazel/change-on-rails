@@ -1,4 +1,13 @@
-<a href=<%= petition_path(petition) %>>
+<a href="<%= petition_path(petition) %>" style="position: relative">
+
+  <% if petition.status == 'victory' %>
+    <div style="position: absolute;z-index: 1000;left: -9px;top: 5px;">
+      <div style="border-width: 0px;border-radius: 4px;border-color: rgb(219, 217, 219);border-style: solid;padding: 5px;background-color: rgb(236, 44, 34);">
+        <p class="victory_p">Victory</p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="petition_card border_rounded bg_brighter" style="margin-bottom:25px;border: none;">
     <div class="petition_card_content" style="padding: 0px;">
       <div style="float: left;padding-right: 0 !important;width: 33.33333333%;">
