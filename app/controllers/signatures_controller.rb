@@ -9,7 +9,7 @@ class SignaturesController < ApplicationController
 
   def create
     @petition = Petition.find(params[:petition_id])
-    if user_signed_in? && @petition.status == 'open' && @petition.signatures.find_by_user_id(current_user.id).nil?
+    if user_signed_in? && @petition.status == 'open' && @petition.signatures.find_by_user_id(current_user.id).nil? && @petition.user.id != current_user.id
       @signature = @petition.signatures.create(signature_params)
       redirect_to petition_path(@petition)
       # Update the goal

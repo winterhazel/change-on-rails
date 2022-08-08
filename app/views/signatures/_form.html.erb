@@ -1,11 +1,9 @@
 <%= form_with model: [@petition, @petition.signatures.build] do |form| %>
-  <p>
-    <%= form.text_area :message %>
-  </p>
-  <p>
-    <%= form.check_box :private %> <span>Do not display my name and comment on this petition</span>
-  </p>
-  <p>
-    <%= form.submit "Sign this petition" %>
-  </p>
+  <span style="font-size: 14px;line-height: 20px;font-weight: bold;">I'm signing because... (optional)</span>
+  <%= form.text_area :message, style: "font-size: 16px;line-height: 24px;padding-top: 14px;padding-bottom: 14px;" %>
+  <div style="margin: 16px 0px;">
+    <%= form.check_box :private %>
+    <span style="font-size: 14px;line-height: 20px;">Do not display my name and comment on this petition</span>
+  </div>
+  <%= form.submit "Sign this petition", class: "button", style: "width: 100%; margin: 0px !important;" %>
 <% end %>

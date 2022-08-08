@@ -75,15 +75,7 @@ class PetitionsController < ApplicationController
   end
 
   def destroy
-    @petition = Petition.find(params[:id])
-
-    unless can_edit?(@petition)
-      redirect_to petition_path
-      return
-    end
-
-    @petition.destroy
-    redirect_to petitions_path
+    redirect_to petition_path
   end
 
   def declare_victory
