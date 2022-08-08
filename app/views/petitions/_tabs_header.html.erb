@@ -4,7 +4,7 @@
     <a id="header_details" href="<%= petition_path(@petition) %>" class="tabs_header_item">Petition
       details</a>
 
-    <% unless @petition.signatures.size == 0 %>
+    <% if @signatures.size > 0 %>
       <a id="header_comments" href="<%= petition_path(@petition) %>/comments" class="tabs_header_item">Comments</a>
     <% end %>
 

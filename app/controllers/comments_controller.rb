@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @petition = Petition.find(params[:id])
-    @search = @petition.signatures.order("created_at DESC")
+    @search = @petition.signatures.where("private == FALSE and LENGTH(message) > 0").order("created_at DESC")
 
     if @search.size == 0
       redirect_to petition_path(@petition)

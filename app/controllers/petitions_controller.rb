@@ -25,6 +25,7 @@ class PetitionsController < ApplicationController
   def show
     @petition = Petition.find(params[:id])
     @current_signature = @petition.signatures.find_by_user_id(current_user.id) if user_signed_in?
+    @signatures = @petition.signatures.where("private == FALSE and LENGTH(message) > 0")
   end
 
   def new
