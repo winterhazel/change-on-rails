@@ -6,11 +6,13 @@ class UsersController < ApplicationController
       redirect_to "#{new_user_session_path}?redirect_to=/users/#{params[:id]}"
       return
     end
+
     if params[:id] == "me"
       @user = current_user
     else
       @user = User.find(params[:id])
     end
+
     @petitions = @user.petitions.order(created_at: :desc)
     @signatures = @user.signatures.order(created_at: :desc)
   end
