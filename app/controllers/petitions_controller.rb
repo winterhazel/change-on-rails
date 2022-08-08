@@ -3,11 +3,11 @@ class PetitionsController < ApplicationController
 
   def index
     if params[:selected] == "recent"
-      @search = Petition.order("created_at DESC").limit(10)
+      @search = Petition.where("status != 'victory'").order("created_at DESC").limit(10)
     elsif params[:selected] == "victories"
       @search = Petition.where("status == 'victory'").order("updated_at DESC").limit(10)
     else
-      @search = Petition.left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC").limit(10)
+      @search = Petition.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
     end
 
     @pagy, @petitions = pagy_countless(@search, items: 3)
