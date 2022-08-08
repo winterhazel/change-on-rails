@@ -15,7 +15,9 @@
       </div>
 
       <div style="margin: 0;padding-bottom: 64px;">
-        <p style="margin: 0;font-size: 18px;line-height: 28px;word-break: break-word;word-wrap: break-word;"><%= @petition.description %></p>
+        <% @petition.description.split("\n").each do |line| %>
+          <p style="margin: 0;font-size: 18px;line-height: 28px;word-break: break-word;word-wrap: break-word;"><%= line %></p>
+        <% end %>
       </div>
     </div>
 
@@ -33,7 +35,7 @@
         <% if user_signed_in? %>
           <% if @petition.user.id == current_user.id %>
             <ul>
-              <li><%= link_to "Edit petition", edit_petition_path(@petition), class: "button", style: "width: 100%;box-sizing: border-box;text-align: center;"%></li>
+              <li><%= link_to "Edit petition", edit_petition_path(@petition), class: "button", style: "width: 100%;box-sizing: border-box;text-align: center;" %></li>
             </ul>
 
           <% else %>
