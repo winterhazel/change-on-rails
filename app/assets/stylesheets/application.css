@@ -223,6 +223,26 @@ footer {
     font-weight: bold;
 }
 
+.button_disabled {
+    position: relative;
+    background: rgb(219, 217, 219) none repeat scroll 0% 0%;
+    color: rgb(173, 172, 173);
+    filter: none;
+    cursor: default;
+    border-color: rgb(219, 217, 219);
+    text-decoration: none;
+    transition: background 0.1s ease 0s, border 0.1s ease 0s;
+    margin-bottom: 25px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    line-height: 1;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    display: inline-block;
+    font-weight: bold;
+}
+
 .button:hover {
     color: #fff;
     background: #dc1d13;
@@ -563,4 +583,45 @@ h1 {
     font-size: 2.44140625rem;
     line-height: 1.2288;
     margin: .3072em 0;
+}
+
+.tip {
+    margin-bottom: 15px;
+}
+
+.tip_title {
+    font-size: 1.25rem;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.tip_description {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.picture_button {
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    height: 48px;
+    cursor: pointer;
+    padding: 12px 16px;
+    color: rgb(236, 44, 34);
+    border-color: rgb(236, 44, 34);
+    display: flex;
+    -moz-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    -moz-box-align: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.picture_button:hover {
+    background: rgb(236, 44, 34) none repeat scroll 0% 0%;
+    color: rgb(255, 255, 255);
+    outline: currentcolor none 0px;
+    border-width: 4px;
 }

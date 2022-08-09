@@ -1,3 +1,121 @@
-<h1>New Petition</h1>
+<%= form_with model: @petition do |form| %>
+  <div style="width: 620px;padding-left: 0px;padding-right: 0px;margin-left: auto;margin-right: auto;">
+    <div style="padding-left: 15px;padding-right: 15px;">
+      <h1 id="page_title" style="font-size: 2.44141rem;margin-top: 60px;margin: 40px 0px 0px;margin-top: 40px;font-weight: bold;line-height: 1.2;">
+        Write your petition title
+      </h1>
+      <p id="page_description" style="margin-top: 15px;margin-bottom: 30px;font-size: 1.25rem;">Tell people what you
+        want to change.</p>
+      <%= form.label "Petition title", id: "form_label" %>
+      <span style="display: block;border-color: rgb(219, 217, 219);border-width: 1px;border-radius: 5px;border-style: solid;width: 100%;margin-top: 0.3125em;">
+        <%= form.text_field :title, style: "box-sizing: border-box;font-size: 1.25rem;display: block;width: 100%;border: medium none;border-radius: 5px;line-height: normal;padding: 10px 0px 10px 10px;color: rgb(54, 49, 53);appearance: none;  overflow: visible;", oninput: "petition_oninput(this)" %>
+        <%= form.text_area :description, style: "display: none;resize: none; height: 300px;", oninput: "petition_oninput(this)" %>
+        <div id="image_input" style="display: none;width: 100%; height: 100%;justify-content: center;flex-direction: column;align-items: center;">
+          <%= image_tag "image-placeholder-drop", style: "margin-top: 60px;margin-bottom: 30px; width: 115px;height: auto;" %>
+          <%= form.file_field :picture, accept: 'image/png,image/jpeg', id: "file", style: "display: none;", onchange: "petition_oninput(this)" %>
+          <button class="picture_button" style="margin-top: 0;margin-bottom: 60px;" onclick="document.getElementById('file').click()" id="file_button">Upload a photo</button>
+        </div>
+      </span>
+      <div style="justify-content: flex-end;display: flex;">
+        <span id="remaining_characters">90</span>
+      </div>
+      <div style="justify-content: flex-end;margin-top: 25px;margin-bottom: 25px;margin-left: 20px;display: flex;">
+        <button id="back_button" style="display: none;margin:0px;margin-right: 15px;width: auto;" class="load_more" onclick="back_onclick()">Back</button>
+        <button id="continue_button" style="margin:0px;" class="button_disabled" onclick="continue_onclick(this)">Continue</button>
+        <%= form.submit "Create petition", id: "create_petition", data: {turbo: false}, class: "button", style: "display: none;margin: 0;" %>
+      </div>
+      <div style="padding-bottom: 60px;">
+        <div style="background-color: rgb(246, 244, 246);border-radius: 5px;border-width: 1px;border-color: rgb(219, 217, 219);border-style: solid;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;padding-top: 20px;">
+          <h2 style="font-size: 1.25rem;margin-bottom: 10px;margin-top: 0px;">
+            Tips
+          </h2>
+          <ul style="margin: 0px;padding: 0px;list-style-type: none;">
 
-<%= render "form", petition: @petition %>
+            <div id="title_tips" style="margin: 0; padding: 0;">
+              <li class="tip">
+                <h3 class="tip_title">
+                  Keep it short and to the point
+                </h3>
+                <p class="tip_description">
+                  Example: “Buy organic, free-range eggs for your restaurants.”
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <h3 class="tip_title">
+                  Focus on the solution
+                </h3>
+                <p class="tip_description">
+                  Example: “Raise the minimum wage to $15 an hour.”
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <h3 class="tip_title">
+                  Communicate urgency
+                </h3>
+                <p class="tip_description">
+                  Example: “Approve life-saving medication for my daughter before it’s too late.”
+                </p>
+              </li>
+            </div>
+
+            <div id="description_tips" style="margin: 0; padding: 0;display: none;">
+              <li class="tip">
+                <p class="tip_description">
+                  Describe who is involved and how they are affected by the problem.
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <p class="tip_description">
+                  Explain what needs to change and who has the power to do something.
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <p class="tip_description">
+                  Make it clear what happens if you win or lose.
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <p class="tip_description">
+                  Don’t bully, use hate speech, threaten violence, or make things up.
+                </p>
+              </li>
+            </div>
+
+            <div id="photo_tips" style="margin: 0; padding: 0;display: none;">
+              <li class="tip">
+                <p class="tip_description">
+                  Use a photo of a person or animal that captures the emotion of your petition.
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <p class="tip_description">
+                  Upload a large photo - at least 1200 x 675 pixels - to look good on all screen sizes.
+                </p>
+              </li>
+
+              <li style="margin-bottom: 15px;">
+                <p class="tip_description">
+                  Don’t show graphic violence or sexual content.
+                </p>
+              </li>
+            </div>
+
+          </ul>
+        </div>
+      </div>
+
+      <% @petition.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= javascript_include_tag "controllers/new_petition" %>
+
+<% end %>
