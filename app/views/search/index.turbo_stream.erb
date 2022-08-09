@@ -1,11 +1,15 @@
 <%= turbo_stream.append "petitions" do %>
   <% @petitions.each do |petition| %>
-    <li><%= link_to petition.title, petition_path(petition) %></li>
+    <li><%= render petition %></li>
   <% end %>
 <% end %>
 
 <%= turbo_stream.update "next_link" do %>
   <% if @pagy.next.present? %>
-    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), {class: "load_more"} %>
+    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), {id: "load_more", class: "load_more", style: "margin: 0;"} %>
   <% end %>
+<% end %>
+
+<%= turbo_stream.update "search_size" do %>
+  <strong><%= @search.size %> result<%= (@search.size != 1) ? "s" : "" %></strong>
 <% end %>

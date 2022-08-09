@@ -1,7 +1,16 @@
 class SearchController < ApplicationController
   def index
-    @complete_search_result = Petition.where("title LIKE :query OR description LIKE :query", query: "%#{params[:query]}%").order(created_at: :desc)
-    @pagy, @petitions = pagy_countless(@complete_search_result, items: 5)
+    unless params[:query].nil?
+      session[:query] = params[:query]
+    end
+
+    unless session[:query].nil?
+      @search = Petition.where("title LIKE :query OR description LIKE :query", query: "%#{session[:query]}%").order(created_at: :desc)
+    else
+      @search = Petition.none
+    end
+
+    @pagy, @petitions = pagy_countless(@search, items: 3)
 
     respond_to do |format|
       format.html # GET

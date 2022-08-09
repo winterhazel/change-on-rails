@@ -625,3 +625,16 @@ h1 {
     outline: currentcolor none 0px;
     border-width: 4px;
 }
+
+h5 {
+    color: #737273;
+    font-size: .8rem;
+    letter-spacing: .144em;
+    line-height: 1.09375;
+    margin: 1.875em 0 .78125em;
+    text-transform: uppercase;
+}
+
+.search_input:focus-visible {
+    outline: none;
+}
