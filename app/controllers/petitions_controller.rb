@@ -68,7 +68,10 @@ class PetitionsController < ApplicationController
       return
     end
 
-    if @petition.update(petition_params)
+    @petition.description = petition_params[:description] unless petition_params[:description].nil?
+    @petition.picture = petition_params[:picture] unless petition_params[:picture].nil?
+
+    if @petition.save
       redirect_to @petition
     else
       render :edit, status: :unprocessable_entity
