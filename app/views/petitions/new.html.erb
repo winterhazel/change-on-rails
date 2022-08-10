@@ -9,7 +9,7 @@
       <%= form.label "Petition title", id: "form_label" %>
       <span style="display: block;border-color: rgb(219, 217, 219);border-width: 1px;border-radius: 5px;border-style: solid;width: 100%;margin-top: 0.3125em;">
         <%= form.text_field :title, style: "box-sizing: border-box;font-size: 1.25rem;display: block;width: 100%;border: medium none;border-radius: 5px;line-height: normal;padding: 10px 0px 10px 10px;color: rgb(54, 49, 53);appearance: none;  overflow: visible;", oninput: "petition_oninput(this)" %>
-        <%= form.text_area :description, style: "display: none;resize: none; height: 300px;", oninput: "petition_oninput(this)" %>
+        <%= form.text_area :description, style: "border: none;display: none;resize: none; height: 300px;", oninput: "petition_oninput(this)" %>
         <div id="image_input" style="display: none;width: 100%; height: 100%;justify-content: center;flex-direction: column;align-items: center;">
           <%= image_tag "image-placeholder-drop", style: "margin-top: 60px;margin-bottom: 30px; width: 115px;height: auto;" %>
           <%= form.file_field :picture, accept: 'image/png,image/jpeg', id: "file", style: "display: none;", onchange: "petition_oninput(this)" %>

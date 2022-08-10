@@ -1,6 +1,41 @@
-<h1>Edit Petition</h1>
+<%= form_with model: @petition do |form| %>
+  <div style="width: 620px;padding-left: 0px;padding-right: 0px;margin-left: auto;margin-right: auto;">
+    <div style="padding-left: 15px;padding-right: 15px;">
+      <h1 style="font-size: 2.44141rem;margin-top: 60px;margin: 40px 0px 0px;margin-top: 40px;font-weight: bold;line-height: 1.2;">
+        Edit petition
+      </h1>
+      <%= form.label "Status" %>
+      <div>
+        <%= link_to "Declare victory", petition_path(@petition) + "/declare_victory", data: {turbo_method: :get, turbo_confirm: "Are you sure?"}, class: "button", style: "margin: 0;" %>
+        <%= link_to "Close petition", petition_path(@petition) + "/close_petition", data: {turbo_method: :get, turbo_confirm: "Are you sure?"}, class: "load_more", style: "margin: 0;" %>
+      </div>
 
-<%= link_to "Declare victory", petition_path(@petition) + "/declare_victory", data: {turbo_method: :get, turbo_confirm: "Are you sure?"} %> |
-<%= link_to "Close petition", petition_path(@petition) + "/close_petition", data: {turbo_method: :get, turbo_confirm: "Are you sure?"} %>
+      <%= form.label "Title" %>
+      <span class="item_container">
+      <input style="box-sizing: border-box;font-size: 1.25rem;display: block;width: 100%;border: medium none;border-radius: 5px;line-height: normal;padding: 10px 0px 10px 10px;color: rgb(54, 49, 53);appearance: none;  overflow: visible;background-color: rgb(219, 217, 219);" value="<%= @petition.title %>" disabled=""/>
+      </span>
 
-<%= render "form", petition: @petition %>
+      <%= form.label "Description" %>
+      <span class="item_container">
+        <%= form.text_area :description, style: "border: none;resize: none; height: 300px;" %>
+      </span>
+
+      <%= form.label "Photo" %>
+      <span class="item_container">
+        <div id="image_input" style="display: flex;width: 100%; height: 100%;justify-content: center;flex-direction: column;align-items: center;">
+          <%= image_tag "image-placeholder-drop", style: "margin-top: 60px;margin-bottom: 30px; width: 115px;height: auto;" %>
+          <%= form.file_field :picture, accept: 'image/png,image/jpeg', id: "file_input", style: "display: none;" %>
+          <a class="picture_button" style="height: auto;margin-top: 0;margin-bottom: 60px;" onclick="document.getElementById('file_input').click()" id="picture_button">Upload a photo</a>
+        </div>
+      </span>
+
+      <div style="justify-content: flex-end;margin-top: 25px;margin-bottom: 25px;margin-left: 20px;display: flex;">
+        <%= form.submit "Update petition", id: "update_petition", data: {turbo: false}, class: "button", style: "margin: 0;" %>
+      </div>
+
+    </div>
+  </div>
+
+  <%= javascript_include_tag "petitions/edit" %>
+
+<% end %>

@@ -623,7 +623,6 @@ h1 {
     background: rgb(236, 44, 34) none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
     outline: currentcolor none 0px;
-    border-width: 4px;
 }
 
 h5 {
@@ -637,4 +636,14 @@ h5 {
 
 .search_input:focus-visible {
     outline: none;
+}
+
+.item_container {
+    display: block;
+    border-color: rgb(219, 217, 219);
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    width: 100%;
+    margin-top: 0.3125em;
 }
