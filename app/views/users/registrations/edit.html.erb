@@ -1,76 +1,91 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container" style="margin-top: 40px !important;margin-bottom: 40px !important;">
+  <div style="margin-left: -10px;margin-right: -10px;">
+    <div style="margin-left: 16.66666667%;width: 66.66666667%;padding-left: 10px;padding-right: 10px;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <h1 style="text-align: center !important;">Edit profile</h1>
 
-  <%= image_tag (@user.avatar.attached?) ? @user.avatar : 'default-user-profile.svg', class: "user-image" %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |form| %>
 
-  <div class="field">
-    <%= f.label "Upload photo" %><br/>
-    <%= f.file_field :avatar, accept: 'image/png,image/jpeg' %>
+        <div style="display: flex; justify-content: center;margin-top: 30px;margin-bottom: 15px;">
+          <%= image_tag (@user.avatar.attached?) ? @user.avatar : 'default-user-profile.svg', style: "width: 90px;height: 90px;margin-right: 0;", class: "petition_card_user_avatar" %>
+        </div>
+
+        <div id="image_input" style="display: flex;width: 100%; height: 100%;justify-content: center;flex-direction: column;align-items: center;">
+          <%= form.file_field :picture, accept: 'image/png,image/jpeg', id: "file_input", style: "display: none;" %>
+          <a class="picture_button" style="height: auto;margin-top: 0;margin-bottom: 60px;" onclick="document.getElementById('file_input').click()" id="picture_button">Upload
+            a photo</a>
+        </div>
+
+        <div class="input_box">
+          <%= form.label "First name" %>
+          <span class="item_container">
+        <%= form.text_field :name, style: "border: none;", class: "text_input" %>
+        </span>
+        </div>
+
+
+        <div class="input_box">
+          <%= form.label "Last name" %>
+          <span class="item_container">
+        <%= form.text_field :surname, style: "border: none;", class: "text_input" %>
+        </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label "About me" %>
+          <span class="item_container">
+        <%= form.text_area :about_me, style: "border: none;resize: none; height: 300px;", placeholder: "Write a short description about yourself" %>
+        </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label "Country" %>
+          <%= form.select :country, ["Country", "Brazil", "United States"], selected: current_user.country %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label "Twitter" %>
+          <span class="item_container" style="display: flex;align-items: center;">
+            <label style="padding-left: 10px;position: absolute;">@</label>
+            <%= form.text_field :twitter_username, class: "text_input", style: "padding-left: 28px;" %>
+          </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :email %>
+          <span class="item_container" style="display: flex;align-items: center;">
+            <%= form.email_field :email, class: "text_input" %>
+          </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :password %>
+          <i>(<%= @minimum_password_length %> characters minimum, leave blank if you don't want to change it)</i>
+          <span class="item_container" style="display: flex;align-items: center;">
+            <%= form.password_field :password, class: "text_input" %>
+          </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :password_confirmation %>
+          <span class="item_container" style="display: flex;align-items: center;">
+            <%= form.password_field :password_confirmation, class: "text_input" %>
+          </span>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+          <span class="item_container" style="display: flex;align-items: center;">
+            <%= form.password_field :current_password, class: "text_input" %>
+          </span>
+        </div>
+
+        <%= form.submit "Save", class: "button", style: "margin: 0;", data: {turbo: false} %>
+        <%= link_to "Back", :back, class: "header_logout", style: "margin-left: 20px;" %>
+
+      <% end %>
+
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label "First name" %><br/>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Last name" %><br/>
-    <%= f.text_field :surname, autocomplete: "surname" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "About me" %><br/>
-    <%= f.text_field :about_me, autocomplete: "about_me" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Country" %><br/>
-    <%= f.select :country, ["Country", "Brazil", "United States"], selected: "country" %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label "Twitter" %><br/>
-    <%= f.text_field :twitter_username, autocomplete: "twitter_username" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br/>
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: {confirm: "Are you sure?"}, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

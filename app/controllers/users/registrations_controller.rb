@@ -25,9 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    redirect_to root_path
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -47,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-     devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :name, :surname, :about_me, :country, :twitter_username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :name, :surname, :about_me, :country, :twitter_username])
   end
 
   # The path used after sign up.
@@ -59,4 +59,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def after_update_path_for(resource)
+    "/users/me"
+  end
 end
