@@ -7,12 +7,7 @@ class UsersController < ApplicationController
       return
     end
 
-    if params[:id] == "me"
-      @user = current_user
-    else
-      @user = User.find(params[:id])
-    end
-
+    @user = params[:id] == "me" ? current_user : User.find(params[:id])
     @petitions = @user.petitions.order(created_at: :desc)
     @signatures = @user.signatures.order(created_at: :desc)
   end
