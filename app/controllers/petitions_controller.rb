@@ -3,7 +3,6 @@ class PetitionsController < ApplicationController
 
   def index
     @search = Petition.where("status != 'closed'")
-
     @search = case params[:selected]
               when "recent"
                 @search.where("status != 'victory'").order("created_at DESC")
@@ -16,11 +15,7 @@ class PetitionsController < ApplicationController
     @pagy, @petitions = pagy_countless(@search, items: 3)
 
     respond_to do |format|
-      format.html do # GET and create/edit POSTs
-        if request.post?
-          create
-        end
-      end
+      format.html { create if request.post? }
       format.turbo_stream
     end
   end
