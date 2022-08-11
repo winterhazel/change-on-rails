@@ -2,12 +2,13 @@ class PetitionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
+    @search = Petition.where("status != 'closed'")
     if params[:selected] == "recent"
-      @search = Petition.where("status != 'victory'").order("created_at DESC").limit(10)
+      @search = @search.where("status != 'victory'").order("created_at DESC")
     elsif params[:selected] == "victories"
-      @search = Petition.where("status == 'victory'").order("updated_at DESC").limit(10)
+      @search = @search.where("status == 'victory'").order("updated_at DESC")
     else
-      @search = Petition.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
+      @search = @search.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
     end
 
     @pagy, @petitions = pagy_countless(@search, items: 3)
