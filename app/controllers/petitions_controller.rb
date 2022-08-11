@@ -3,13 +3,15 @@ class PetitionsController < ApplicationController
 
   def index
     @search = Petition.where("status != 'closed'")
-    if params[:selected] == "recent"
-      @search = @search.where("status != 'victory'").order("created_at DESC")
-    elsif params[:selected] == "victories"
-      @search = @search.where("status == 'victory'").order("updated_at DESC")
-    else
-      @search = @search.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
-    end
+
+    @search = case params[:selected]
+              when "recent"
+                @search.where("status != 'victory'").order("created_at DESC")
+              when "victories"
+                @search.where("status == 'victory'").order("updated_at DESC")
+              else
+                @search.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
+              end
 
     @pagy, @petitions = pagy_countless(@search, items: 3)
 
