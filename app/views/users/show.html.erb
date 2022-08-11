@@ -23,34 +23,35 @@
         <p><%= @user.about_me %></p>
         <% if current_user.id == @user.id %>
           <%= link_to "Edit profile", edit_user_registration_path, :class => 'load_more', style: "margin-top: 15px !important;margin-bottom: 15px !important;padding: 8px 16px;font-size: .8rem;" %>
+
+          <div class="browse_menu" style="margin-top: 25px;">
+            <%= link_to "Started (#{@user.petitions.count})", request.path, :class => 'header_link', :id => "started" %>
+            <%= link_to "Signed (#{@user.signatures.count})", request.path + "?selected=signed", :class => 'header_link', :id => "signed" %>
+          </div>
+          <hr class="separator" style="margin-bottom: 1.5em;"/>
+
+          <ul id="petition_list">
+            <% @petitions.each do |petition| %>
+              <li><%= render petition %></li>
+            <% end %>
+          </ul>
+
+          <div id="load_more">
+            <% if @pagy.next.present? %>
+              <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more", style: "margin: 0px;margin-top: 25px;"%>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<br><br><br><br><br>
-
-
-
-<p>
-  <% unless @user.country.nil? || @user.country == "Country" %>
-    <%= @user.country %>
-  <% end %>
-  <% unless @user.twitter_username.nil? || @user.twitter_username.length == 0 %>
-    @<%= @user.twitter_username %>
-  <% end %>
-</p>
-<p><%= @user.about_me %></p>
-
-<% if @user.id == current_user.id %>
-  <h2>Started (<%= @petitions.size %>)</h2>
-  <%= render @petitions %>
-
-  <br>
-
-  <h2>Signed (<%= @signatures.size %>)</h2>
-  <% @signatures.each do |signature| %>
-    <%= render signature.petition %>
-  <% end %>
-<% end %>
+<script>
+    // Selected tabs item
+    if ("<%= params[:selected] %>" == "signed") {
+        document.getElementById("signed").classList.add("browse_selected");
+    } else {
+        document.getElementById("started").classList.add("browse_selected");
+    }
+</script>

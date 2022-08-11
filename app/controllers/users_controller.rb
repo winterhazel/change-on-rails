@@ -2,14 +2,22 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def show
-    unless user_signed_in?
-      redirect_to "#{new_user_session_path}?redirect_to=/users/#{params[:id]}"
-      return
-    end
+    return redirect_to "#{new_user_session_path}?redirect_to=/users/#{params[:id]}" unless user_signed_in?
 
     @user = params[:id] == "me" ? current_user : User.find(params[:id])
-    @petitions = @user.petitions.order(created_at: :desc)
-    @signatures = @user.signatures.order(created_at: :desc)
+    @search = case params[:selected]
+              when "signed"
+                @user.signatures
+              else
+                @user.petitions
+              end
+    @pagy, @petitions = pagy_countless(@search.order(created_at: :desc), items: 3)
+    @petitions.map! {|signature| signature.petition} if params[:selected] == "signed" # Get the petitions
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   private

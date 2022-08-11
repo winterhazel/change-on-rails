@@ -1,0 +1,11 @@
+<%= turbo_stream.append "petition_list" do %>
+  <% @petitions.each do |petition| %>
+    <li><%= render petition %></li>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "load_more" do %>
+  <% if @pagy.next.present? %>
+    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class: "load_more", style: "margin: 0px;margin-top: 25px;" %>
+  <% end %>
+<% end %>
