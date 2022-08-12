@@ -11,7 +11,7 @@
         </div>
 
         <div id="image_input" style="display: flex;width: 100%; height: 100%;justify-content: center;flex-direction: column;align-items: center;">
-          <%= form.file_field :picture, accept: 'image/png,image/jpeg', id: "file_input", style: "display: none;" %>
+          <%= form.file_field :avatar, accept: 'image/png,image/jpeg', id: "file_input", style: "display: none;" %>
           <a class="picture_button" style="height: auto;margin-top: 0;margin-bottom: 60px;" onclick="document.getElementById('file_input').click()" id="picture_button">Upload
             a photo</a>
         </div>
@@ -82,10 +82,10 @@
 
         <%= form.submit "Save", class: "button", style: "margin: 0;", data: {turbo: false} %>
         <%= link_to "Back", :back, class: "header_logout", style: "margin-left: 20px;" %>
-
       <% end %>
-
-
+      
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'users/registrations/edit' %>
