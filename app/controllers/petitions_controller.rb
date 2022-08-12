@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class PetitionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     @search = Petition.where("status != 'closed'")
     @search = case params[:selected]
-              when "recent"
-                @search.where("status != 'victory'").order("created_at DESC")
-              when "victories"
-                @search.where("status == 'victory'").order("updated_at DESC")
+              when 'recent'
+                @search.where("status != 'victory'").order('created_at DESC')
+              when 'victories'
+                @search.where("status == 'victory'").order('updated_at DESC')
               else
-                @search.where("status != 'victory'").left_joins(:signatures).group(:id).order("COUNT(signatures.id) DESC")
+                @search.where("status != 'victory'").left_joins(:signatures).group(:id).order('COUNT(signatures.id) DESC')
               end
 
     @pagy, @petitions = pagy_countless(@search, items: 3)
@@ -22,8 +24,8 @@ class PetitionsController < ApplicationController
 
   def show
     @petition = Petition.find(params[:id])
-    @current_signature = @petition.signatures.find_by_user_id(current_user.id) if user_signed_in?
-    @signatures = @petition.signatures.where("private == FALSE and LENGTH(message) > 0")
+    @current_signature = @petition.signatures.find_by(user_id: current_user.id) if user_signed_in?
+    @signatures = @petition.signatures.where('private == FALSE and LENGTH(message) > 0')
   end
 
   def new
@@ -97,7 +99,7 @@ class PetitionsController < ApplicationController
     params.require(:petition).permit(:title, :description, :picture).with_defaults(goal: 100, status: :open)
   end
 
-  def can_edit? (petition)
+  def can_edit?(petition)
     user_signed_in? && petition.user.id == current_user.id && petition.status == 'open'
   end
 
@@ -105,4 +107,3 @@ class PetitionsController < ApplicationController
     redirect_to petitions_path
   end
 end
-

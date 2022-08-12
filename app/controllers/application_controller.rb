@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
-    @search = Petition.order("created_at DESC")
+    @search = Petition.order('created_at DESC')
     @pagy, @petitions = pagy_countless(@search, items: 3)
 
     respond_to do |format|
@@ -16,6 +18,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :surname])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name surname])
   end
 end
