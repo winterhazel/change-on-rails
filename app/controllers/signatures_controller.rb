@@ -9,25 +9,11 @@ class SignaturesController < ApplicationController
 
   def create
     @petition = Petition.find(params[:petition_id])
-    if user_signed_in? && @petition.status == 'open' && @petition.signatures.find_by_user_id(current_user.id).nil? && @petition.user.id != current_user.id
+
+    if can_sign?(@petition)
       @signature = @petition.signatures.create(signature_params)
       redirect_to petition_path(@petition)
-      # Update the goal
-      if @petition.goal - @petition.signatures.size <= 10
-        if @petition.goal < 1000
-          step = 50
-        elsif @petition.goal < 10000
-          step = 500
-        elsif @petition.goal <= 100000
-          step = 5000
-        elsif @petition.goal < 1000000
-          step = 50000
-        else
-          step = 500000
-        end
-        @petition.goal += step
-        @petition.save
-      end
+      update_goal(@petition)
     else
       # Not logged in/petition not open/user already signed for petition
       redirect_to petition_path(@petition)
@@ -42,5 +28,28 @@ class SignaturesController < ApplicationController
 
   def signature_params
     params.require(:signature).permit(:message, :private).with_defaults(user_id: current_user.id)
+  end
+
+  def can_sign?(petition)
+    user_signed_in? && petition.status == 'open' && petition.signatures.find_by_user_id(current_user.id).nil? && petition.user.id != current_user.id
+  end
+
+  def update_goal(petition)
+    if petition.goal - petition.signatures.size <= 10
+      step = case petition.goal
+             when 0...1000
+               50
+             when 1000...10000
+               500
+             when 10000...100000
+               5000
+             when 100000...1000000
+               50000
+             else
+               500000
+             end
+      petition.goal += step
+      petition.save
+    end
   end
 end

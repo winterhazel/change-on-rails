@@ -1,20 +1,16 @@
 class SearchController < ApplicationController
   def index
-    unless params[:query].nil?
-      session[:query] = params[:query]
-    end
-
-    unless session[:query].nil?
-      @search = Petition.where("title LIKE :query OR description LIKE :query", query: "%#{session[:query]}%").order(created_at: :desc)
-    else
-      @search = Petition.none
-    end
-
+    session[:query] = params[:query] unless params[:query].nil?
+    @search = if session[:query].nil?
+                Petition.none
+              else
+                Petition.where("title LIKE :query OR description LIKE :query", query: "%#{session[:query]}%").order(created_at: :desc)
+              end
     @pagy, @petitions = pagy_countless(@search, items: 3)
 
     respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
+      format.html
+      format.turbo_stream
     end
   end
 end

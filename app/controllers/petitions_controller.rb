@@ -27,19 +27,13 @@ class PetitionsController < ApplicationController
   end
 
   def new
-    unless user_signed_in?
-      redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}"
-      return
-    end
+    return redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}" unless user_signed_in?
 
     @petition = Petition.new
   end
 
   def create
-    unless user_signed_in?
-      redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}"
-      return
-    end
+    return redirect_to "#{new_user_session_path}?redirect_to=#{new_petition_path}" unless user_signed_in?
 
     @petition = current_user.petitions.create(petition_params)
 
@@ -53,18 +47,13 @@ class PetitionsController < ApplicationController
   def edit
     @petition = Petition.find(params[:id])
 
-    unless can_edit?(@petition)
-      redirect_to petition_path
-    end
+    redirect_to petition_path unless can_edit?(@petition)
   end
 
   def update
     @petition = Petition.find(params[:id])
 
-    unless can_edit?(@petition)
-      redirect_to petition_path
-      return
-    end
+    return redirect_to petition_path unless can_edit?(@petition)
 
     @petition.description = petition_params[:description] unless petition_params[:description].nil?
     @petition.picture = petition_params[:picture] unless petition_params[:picture].nil?
@@ -83,10 +72,7 @@ class PetitionsController < ApplicationController
   def declare_victory
     @petition = Petition.find(params[:id])
 
-    unless can_edit?(@petition)
-      redirect_to petition_path
-      return
-    end
+    return redirect_to petition_path unless can_edit?(@petition)
 
     @petition.status = :victory
     @petition.save
@@ -97,10 +83,7 @@ class PetitionsController < ApplicationController
   def close_petition
     @petition = Petition.find(params[:id])
 
-    unless can_edit?(@petition)
-      redirect_to petition_path
-      return
-    end
+    return redirect_to petition_path unless can_edit?(@petition)
 
     @petition.status = :closed
     @petition.save
